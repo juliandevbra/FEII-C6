@@ -119,3 +119,7 @@ console.log(maxNum)
 const randomNum = Math.floor(Math.random() * 10) + 1 //Operacion para obtener un numero entre 10
 console.log(randomNum)
 
+// Ejercitación 1
+while(!nombre){ //Sea diferente a null || undefined || false || ''
+    nombre = prompt('Coloque su nombre')
+}

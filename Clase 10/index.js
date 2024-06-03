@@ -74,7 +74,7 @@ form.addEventListener("submit", (e) => {
     //LocalStorage y SessionStorage
     localStorage.setItem("user", JSON.stringify(user));
     setTimeout(() => {
-      location.href = `usuario.html`;
+      location.replace("usuario.html");
     }, 2000);
     form.reset();
   }

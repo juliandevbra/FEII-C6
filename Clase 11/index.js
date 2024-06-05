@@ -64,17 +64,17 @@ const obtenerPaises = (exito) => {
     }
   });
 };
-
-// obtenerPaises(true)
-//   .then((res) => {
-//     console.log(res);
-//     const ul = document.createElement("ol");
-//     res.forEach((pais) => {
-//       ul.innerHTML += `<li>Pais: ${pais.nombre} - Capital: ${pais.capital}</li>`;
-//     });
-//     main.appendChild(ul);
-//   })
-//   .catch((err) => console.log(err));
+console.log(obtenerPaises().then());
+obtenerPaises(true)
+  .then((res) => {
+    console.log(res);
+    const ol = document.createElement("ol");
+    res.forEach((pais) => {
+      ol.innerHTML += `<li>Pais: ${pais.nombre} - Capital: ${pais.capital}</li>`;
+    });
+    main.appendChild(ol);
+  })
+  .catch((err) => console.log(err));
 
 const url = "https://api.thecatapi.com/v1/images/search?limit=10";
 fetch(url)
@@ -85,7 +85,7 @@ fetch(url)
     console.log(data);
     data.forEach((gatito) => {
       main.innerHTML += `
-            <img src=${gatito.url} width='200'>
+            <img src=${gatito.url} width='200' alt=${gatito.id}>
         `;
     });
   });

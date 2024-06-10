@@ -53,33 +53,52 @@ window.addEventListener("load", () => {
   // obtenerCartoons();
 
   //Probamos otra API con SweetAlert
-  const obtenerPersonajes = async () => {
-    try {
-      const res = await fetch(url); //Espera a realizar la petición antes de asignar a la variable res
-      const data = await res.json(); //Espera a convertir la respuesta en un json antes de asignar a la variable data
-      console.log(data);
-      if (data.results.length > 0) {
-        //Si data.results es un array, lo itera y lo renderiza
-        const loader = document.querySelector(".loader");
-        loader.remove();
-        data.results.forEach((item) => {
-          listSection.innerHTML += `
-            <div class='card'>
-              <h4>${item.name}</h4>
-              <img src=${item.image} alt=${item.name} width=200>
-            </div>
-          `;
-        });
-      }
-    } catch (err) {
-      //Caso contrario muestro un alert con Sweetalert
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-        footer: err,
-      });
-    }
+  // const obtenerPersonajes = async () => {
+  //   try {
+  //     const res = await fetch(url); //Espera a realizar la petición antes de asignar a la variable res
+  //     const data = await res.json(); //Espera a convertir la respuesta en un json antes de asignar a la variable data
+  //     console.log(data);
+  //     if (data.results.length > 0) {
+  //       //Si data.results es un array, lo itera y lo renderiza
+  //       const loader = document.querySelector(".loader");
+  //       loader.remove();
+  //       data.results.forEach((item) => {
+  //         listSection.innerHTML += `
+  //           <div class='card'>
+  //             <h4>${item.name}</h4>
+  //             <img src=${item.image} alt=${item.name} width=200>
+  //           </div>
+  //         `;
+  //       });
+  //     }
+  //   } catch (err) {
+  //     //Caso contrario muestro un alert con Sweetalert
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Something went wrong!",
+  //       footer: err,
+  //     });
+  //   }
+  // };
+  // obtenerPersonajes();
+
+  //Ejemplo básico de POST a jsonplaceholder
+  const endpoint = "https://jsonplaceholder.typicode.com/posts";
+  const data = {
+    title: "Title example",
+    body: "Body description",
+    userId: 10,
   };
-  obtenerPersonajes();
+  const options = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+
+  fetch(endpoint, options)
+    .then((response) => console.log(response))
+    .then((json) => console.log(json));
 });

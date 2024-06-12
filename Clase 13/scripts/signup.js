@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
   const apellido = document.querySelector("#inputApellido");
   const email = document.querySelector("#inputEmail");
   const password = document.querySelector("#inputPassword");
-  const url = "https://ctd-todo-api.herokuapp.com/v1/users";
+  const url = "https://todo-api.digitalhouse.com/v1/users";
 
   /* -------------------------------------------------------------------------- */
   /*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */

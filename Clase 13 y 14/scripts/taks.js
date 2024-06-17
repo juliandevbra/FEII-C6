@@ -136,6 +136,29 @@ window.addEventListener("load", function () {
     // Dentro del bucle, agregar un evento a cada botón
     // Verificamos el estado de la tarea
     // fetch a la API con un método PUT con el id que contiene el botón
+    btnChange.forEach((boton) => {
+      boton.addEventListener("click", (e) => {
+        const id = e.target.id;
+        const data = {};
+        if (e.target.classList.contains("incompleta")) {
+          data.completed = false;
+        } else {
+          data.completed = true;
+        }
+        const settings = {
+          method: "PUT",
+          headers: {
+            Authorization: token,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        fetch(urlTask + id, settings).then((resp) => {
+          console.log(resp);
+          consultarTareas();
+        });
+      });
+    });
   }
 
   /* -------------------------------------------------------------------------- */

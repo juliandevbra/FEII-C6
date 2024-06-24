@@ -15,8 +15,17 @@ window.addEventListener("load", function () {
   /* -------------------------------------------------------------------------- */
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    mostrarSpinner();
+    if (!validarEmail(email.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Email no válido.",
+      });
+      return;
+    }
+
     const data = {
-      email: email.value,
+      email: normalizarEmail(email.value),
       password: pass.value,
     };
     console.log(data);
@@ -42,6 +51,7 @@ window.addEventListener("load", function () {
           localStorage.setItem("jwt", data.jwt);
         }
         setTimeout(() => {
+          ocultarSpinner();
           location.replace("./mis-tareas.html");
         }, 2000);
       })

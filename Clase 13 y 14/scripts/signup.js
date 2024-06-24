@@ -5,6 +5,7 @@ window.addEventListener("load", function () {
   const apellido = document.querySelector("#inputApellido");
   const email = document.querySelector("#inputEmail");
   const password = document.querySelector("#inputPassword");
+  const passRepetida = document.querySelector("#inputPasswordRepetida");
   const url = "https://todo-api.digitalhouse.com/v1/users";
 
   /* -------------------------------------------------------------------------- */
@@ -12,11 +13,47 @@ window.addEventListener("load", function () {
   /* -------------------------------------------------------------------------- */
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    mostrarSpinner();
+    if (!validarTexto(nombre.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Nombre no válido.",
+      });
+      return;
+    }
+    if (!validarTexto(apellido.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Apellido no válido.",
+      });
+      return;
+    }
+    if (!validarEmail(email.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Email no válido.",
+      });
+      return;
+    }
+    if (!validarContrasenia(password.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Mínimo 6 caracteres en contraseña.",
+      });
+      return;
+    }
+    if (!compararContrasenias(password.value, passRepetida.value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Las contraseñas no coinciden.",
+      });
+      return;
+    }
     //creamos el cuerpo de la request
     const payload = {
-      firstName: nombre.value,
-      lastName: apellido.value,
-      email: email.value,
+      firstName: normalizarTexto(nombre.value),
+      lastName: normalizarTexto(apellido.value),
+      email: normalizarEmail(email.value),
       password: password.value,
     };
     //configuramos la request del Fetch
@@ -52,7 +89,10 @@ window.addEventListener("load", function () {
           localStorage.setItem("jwt", JSON.stringify(data.jwt));
 
           //redireccionamos a la página
-          location.replace("./mis-tareas.html");
+          setTimeout(() => {
+            ocultarSpinner();
+            location.replace("./mis-tareas.html");
+          }, 2000);
         }
       })
       .catch((err) => {

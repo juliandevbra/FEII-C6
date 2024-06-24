@@ -13,9 +13,13 @@ window.addEventListener("load", function () {
 
   const btnCerrarSesion = document.querySelector("#closeApp");
   const formCrearTarea = document.querySelector(".nueva-tarea");
+  renderizarSkeletons(3, ".tareas-pendientes");
 
   obtenerNombreUsuario();
-  consultarTareas();
+
+  setTimeout(() => {
+    consultarTareas();
+  }, 2000);
 
   /* -------------------------------------------------------------------------- */
   /*                          FUNCIÓN 1 - Cerrar sesión                         */
@@ -86,6 +90,9 @@ window.addEventListener("load", function () {
     const tareasPendientes = document.querySelector(".tareas-pendientes");
     const tareasTerminadas = document.querySelector(".tareas-terminadas");
     console.log(tareasPendientes, tareasTerminadas);
+
+    tareasPendientes.innerHTML = "";
+    tareasTerminadas.innerHTML = "";
 
     const cantFinalizadas = document.querySelector("#cantidad-finalizadas");
     console.log(cantFinalizadas);
